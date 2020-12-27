@@ -79,7 +79,7 @@ namespace MyGame.WebApi
 
 
             services.AddScoped<IGameRepository, GameRepository>();
-            services.AddSingleton<IMyGameCosmosClient>(new MyGameCosmosClient().Initialize().Result);
+            services.AddSingleton<IMyGameCosmosClient>(new MyGameCosmosClient("MyGame").Initialize().Result);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

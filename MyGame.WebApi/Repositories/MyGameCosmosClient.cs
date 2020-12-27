@@ -7,6 +7,14 @@ namespace MyGame.WebApi.Repositories
 {
     public class MyGameCosmosClient : IMyGameCosmosClient
     {
+        private string containerName;
+        private Database database;
+
+        public MyGameCosmosClient(string containerName)
+        {
+            this.containerName = containerName;
+        }
+
         public Container Container { get; private set; }
 
         public async Task Add(Game game)
@@ -25,11 +33,22 @@ namespace MyGame.WebApi.Repositories
                 .Build();
             
             var databaseResponse = await cosmosClient.CreateDatabaseIfNotExistsAsync("Games");
-            var containerResponse = await databaseResponse.Database.CreateContainerIfNotExistsAsync("MyGame", "/ownerId");
-
-            Container = containerResponse.Container;
+            database = databaseResponse.Database;
+            Container = await CreateOrGetContainer();
 
             return this;
+        }
+
+        private async Task<Container> CreateOrGetContainer()
+        {
+            return (await database.CreateContainerIfNotExistsAsync(containerName, "/id")).Container;
+        }
+
+        public async Task ResetContainer()
+        {
+            await this.Container.DeleteContainerAsync();
+            Container = await CreateOrGetContainer();
+            
         }
     }
 }

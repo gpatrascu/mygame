@@ -5,7 +5,7 @@ namespace MyGame.WebApi.Controllers
 {
     public class Game
     {
-        public Game(Guid id, string ownerId, IList<Player> players)
+        public Game(string id, string ownerId, IList<Player> players)
         {
             Players = players;
             Id = id;
@@ -14,7 +14,7 @@ namespace MyGame.WebApi.Controllers
 
         public IList<Player> Players { get; }
 
-        public Guid Id { get; }
+        public string Id { get; }
         public string OwnerId { get; }
 
         public static Game CreateFor(string ownerId, string playerName)
@@ -23,7 +23,12 @@ namespace MyGame.WebApi.Controllers
             {
                 new(ownerId, playerName)
             };
-            return new Game(Guid.NewGuid(), ownerId, players);
+            return new Game(Guid.NewGuid().ToString(), ownerId, players);
+        }
+
+        public void AddPlayer(Player player)
+        {
+            this.Players.Add(player);
         }
     }
 

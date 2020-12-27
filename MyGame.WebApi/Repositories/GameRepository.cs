@@ -1,7 +1,5 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Linq;
@@ -20,12 +18,12 @@ namespace MyGame.WebApi.Controllers
 
         public async Task Add(Game game)
         {
-            await this.cosmosClient.Add(game);
+            await cosmosClient.Add(game);
         }
 
         public async Task<IList<Game>> GetActiveGames()
         {
-            var feedIterator = this.cosmosClient.Container.GetItemLinqQueryable<Game>()
+            var feedIterator = cosmosClient.Container.GetItemLinqQueryable<Game>()
                 .ToFeedIterator();
 
             var games = new List<Game>();
@@ -35,6 +33,23 @@ namespace MyGame.WebApi.Controllers
             }
 
             return games;
+        }
+
+        public async Task<Game> GetById(string gameId)
+        {
+            try
+            {
+                return await cosmosClient.Container.ReadItemAsync<Game>(gameId, new PartitionKey(gameId));
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task Update(Game game)
+        {
+            await cosmosClient.Container.UpsertItemAsync(game, new PartitionKey(game.Id));
         }
     }
 }

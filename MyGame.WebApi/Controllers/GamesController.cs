@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,17 @@ namespace MyGame.WebApi.Controllers
             this.gameRepository = gameRepository;
         }
 
+        [HttpPost("{gameId}/players")]
+        public async Task<IActionResult> PostPlayer(string gameId, [FromBody] PlayerModel player)
+        {
+            var game = await gameRepository.GetById(gameId);
+            game.AddPlayer(new Player(GetUserId(), player.Name));
+
+            await gameRepository.Update(game);
+            var postPlayer = GameModel.From(game);
+            return Created("", postPlayer);
+        }
+        
         [HttpPost("moves")]
         public async Task<IActionResult> PostMove([FromBody] GameMove gameMove)
         {

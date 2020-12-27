@@ -27,7 +27,7 @@ namespace MyGame.WebApi.Tests
             // httpClient = new HttpClient {BaseAddress = new Uri("https://localhost:5001")};
 
             httpClient = factory.CreateClient();
-            var token = Authenticate().Result;
+            var token = IdentityOperations.Authenticate("george.patrascu@yahoo.com").Result;
             PrintUserClaims(token).Wait();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
         }
@@ -42,7 +42,7 @@ namespace MyGame.WebApi.Tests
                 testOutputHelper.WriteLine(game.Id.ToString());
                 foreach (var gamePlayer in game.Players)
                 {
-                    testOutputHelper.WriteLine(gamePlayer);
+                    testOutputHelper.WriteLine(gamePlayer.Name);
                 }
             }
         }
@@ -80,31 +80,6 @@ namespace MyGame.WebApi.Tests
             var stringAsync = await httpClientForAuth.GetStringAsync("/connect/userinfo");
 
             testOutputHelper.WriteLine(stringAsync);
-        }
-
-        private async Task<string> Authenticate()
-        {
-            HttpClient httpClientForAuth =
-                new HttpClient {BaseAddress = new Uri("https://localhost:5100")};
-
-            var httpResponseMessage = await httpClientForAuth.PostAsync("/connect/token", new FormUrlEncodedContent(
-                new[]
-                {
-                    new KeyValuePair<string, string>("client_id", "mygame"),
-                    new KeyValuePair<string, string>("client_secret", "secret"),
-                    new KeyValuePair<string, string>("grant_type", "password"),
-                    new KeyValuePair<string, string>("username", "george.patrascu@yahoo.com"),
-                    new KeyValuePair<string, string>("password", "password"),
-                    new KeyValuePair<string, string>("scope", "openid profile mygame email"),
-                    new KeyValuePair<string, string>("response_type", "code"),
-                }));
-
-            var jObject = await httpResponseMessage.Content.ReadFromJsonAsync<JsonElement>();
-
-            var accessToken = jObject.GetProperty("access_token").ToString();
-            ////testOutputHelper.WriteLine(accessToken);
-
-            return accessToken;
         }
     }
 }
