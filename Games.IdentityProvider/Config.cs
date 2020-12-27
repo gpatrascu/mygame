@@ -60,18 +60,26 @@ namespace Games.IdentityProvider
 
         public static IEnumerable<TestUser> Users => new[]
         {
-            new TestUser()
+            CreateTestUser("george.patrascu@yahoo.com", "George Patrascu"),
+            CreateTestUser("valentina.patrascu@yahoo.com", "Valentina Patrascu"),
+            CreateTestUser("grogu.patrascu@yahoo.com", "Grogu Patrascu"),
+            CreateTestUser("georgiana.moldovan@yahoo.com", "Georgiana Moldovan"),
+            CreateTestUser("iosif.moldovan@yahoo.com", "Iosif Moldovan"),
+        };
+
+        private static TestUser CreateTestUser(string mail, string name)
+        {
+            return new TestUser()
             {
-                SubjectId = "george.patrascu@yahoo.com",
-                Username = "george.patrascu@yahoo.com",
+                SubjectId = mail,
+                Username = mail,
                 Password = "password", 
                 
                 Claims = new List<Claim>()
                 {
-                    new ("http://schemas.xmlsoap.org/ws/2005/05/idntity/claims/name", "george patrascu"),
-                    new ("age", "100")
+                    new ("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name", name)
                 }
-            }
-        };
+            };
+        }
     }
 }

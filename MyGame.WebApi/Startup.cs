@@ -16,6 +16,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using MyGame.WebApi.Controllers;
+using MyGame.WebApi.Repositories;
 
 namespace MyGame.WebApi
 {
@@ -74,6 +76,10 @@ namespace MyGame.WebApi
             });
             services.AddSignalR()
                 .AddAzureSignalR();
+
+
+            services.AddScoped<IGameRepository, GameRepository>();
+            services.AddSingleton<IMyGameCosmosClient>(new MyGameCosmosClient().Initialize().Result);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

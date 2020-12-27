@@ -12,7 +12,7 @@ using Xunit.Abstractions;
 
 namespace MyGame.WebApi.Tests
 {
-    public class MyGameWebApiTests : IClassFixture<WebApplicationFactory<Startup>>
+    public class MyGameWebApi_JoinTests : IClassFixture<WebApplicationFactory<Startup>>
 
     {
         private readonly ITestOutputHelper testOutputHelper;
@@ -20,7 +20,7 @@ namespace MyGame.WebApi.Tests
         private WebApplicationFactory<Startup> factory;
         private HttpClient httpClient;
 
-        public MyGameWebApiTests(ITestOutputHelper testOutputHelper, WebApplicationFactory<Startup> factory)
+        public MyGameWebApi_JoinTests(ITestOutputHelper testOutputHelper, WebApplicationFactory<Startup> factory)
         {
             this.testOutputHelper = testOutputHelper;
             this.factory = factory;
