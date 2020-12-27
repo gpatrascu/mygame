@@ -23,11 +23,22 @@ function Home() {
 
   const createGame = async () => {
       console.log("create game method pressed");
-      await gameService.CreateGame(user.profile.name);
+      await gameService.createGame(user.profile.name);
+      await getGames();
+  }
+  
+  const joinGame = async (gameId) => {
+      await gameService.joinGame(gameId, user.profile.name);
       await getGames();
   }
 
-  return (
+    const leaveGame = async (gameId) => {
+        await gameService.leaveGame(gameId, user.profile.sub);
+        await getGames();
+    }
+    
+
+    return (
     <div>
       <h1>Home</h1>
       <p>Hello, {user.profile.name}.</p>
@@ -40,10 +51,13 @@ function Home() {
              <div key={game.id}>
                  {game.players.map(p => {
                      return (
-                         <p key={p}>{p}</p>
+                         <div key={p.id}>{p.name}
+                         </div>
+                         
                      )
                  })} 
-                 <button>Join</button>
+                 <button onClick={()=>joinGame(game.id)}>Join</button>
+                 <button onClick={()=>leaveGame(game.id)}>Leave</button>
              </div>
              
          ); 

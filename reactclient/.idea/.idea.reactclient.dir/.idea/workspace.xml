@@ -2,18 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c5f9f59a-f0aa-4004-9fa0-c5d2d214c4d9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../MyGame.WebApi.Tests/IdentityOperations.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MyGame.WebApi.Tests/JoinWorkflowWebApplicationFactory.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MyGame.Domain/Game.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../MyGame.Domain/Game.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MyGame.WebApi.Tests/MyGameWebApI_JoinTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../MyGame.WebApi.Tests/JoinGameTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MyGame.WebApi.Tests/MyGameWebApiTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../MyGame.WebApi.Tests/MyGameWebApiTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MyGame.WebApi/Controllers/GameModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../MyGame.WebApi/Controllers/GameModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MyGame.WebApi.Tests/JoinGameTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../MyGame.WebApi.Tests/JoinGameTests.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MyGame.WebApi/Controllers/GamesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../MyGame.WebApi/Controllers/GamesController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MyGame.WebApi/Repositories/GameRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../MyGame.WebApi/Repositories/GameRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MyGame.WebApi/Repositories/IGameRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../MyGame.WebApi/Repositories/IGameRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MyGame.WebApi/Repositories/MyGameCosmosClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../MyGame.WebApi/Repositories/MyGameCosmosClient.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MyGame.WebApi/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../MyGame.WebApi/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.reactclient.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.reactclient.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/gameService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/gameService.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +17,12 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <changedPaths>
+      <option value="$PROJECT_DIR$/src/pages/home.js" />
+      <option value="$PROJECT_DIR$/src/services/gameService.js" />
+    </changedPaths>
   </component>
   <component name="ProjectId" id="1mFhr1xbOLoDJu03vhUrO2xHkqs" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -48,7 +49,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1609095441319</updated>
-      <workItem from="1609095452987" duration="4782000" />
+      <workItem from="1609095452987" duration="6777000" />
     </task>
     <servers />
   </component>

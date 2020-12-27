@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MyGame.WebApi.Controllers
 {
@@ -28,7 +29,18 @@ namespace MyGame.WebApi.Controllers
 
         public void AddPlayer(Player player)
         {
-            this.Players.Add(player);
+            Players.Add(player);
+        }
+
+        public void RemovePlayer(string playerId)
+        {
+            var player = Players.FirstOrDefault(player => player.PlayerId == playerId);
+            if (player == null)
+            {
+                return;
+            }
+
+            Players.Remove(player);
         }
     }
 

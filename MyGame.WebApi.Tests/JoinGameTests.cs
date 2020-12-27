@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -34,15 +35,30 @@ namespace MyGame.WebApi.Tests
             SetAuthorizationHeader(await IdentityOperations.Authenticate("george.patrascu@yahoo.com"));
             var game = await CreateNewGame();
             SetAuthorizationHeader(await IdentityOperations.Authenticate("valentina.patrascu@yahoo.com"));
-            await JoinGame(game);
+            game = await JoinGame(game);
+            await LeaveGame(game);
         }
 
-        private async Task JoinGame(GameModel gameModel)
+        private async Task LeaveGame(GameModel gameModel)
+        {
+            var playerModel = gameModel.Players.FirstOrDefault(model => model.Name == "Valentina");
+            
+            Assert.NotNull(playerModel);
+            
+            var postNewGame = await httpClient.DeleteAsync($"/Games/{gameModel.Id}/players/{playerModel.Id}");
+            Assert.Equal(HttpStatusCode.OK, postNewGame.StatusCode);
+            var game = await postNewGame.Content.ReadFromJsonAsync<GameModel>();
+            Assert.Single(game.Players);
+        }
+
+        private async Task<GameModel> JoinGame(GameModel gameModel)
         {
             var postNewGame = await httpClient.PostAsJsonAsync($"/Games/{gameModel.Id}/players", new {Name = "Valentina"});
             Assert.Equal(HttpStatusCode.Created, postNewGame.StatusCode);
             var game = await postNewGame.Content.ReadFromJsonAsync<GameModel>();
             Assert.Equal(2, game.Players.Count);
+
+            return game;
         }
 
         private void SetAuthorizationHeader(string token)

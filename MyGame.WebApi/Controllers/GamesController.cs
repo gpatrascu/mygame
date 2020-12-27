@@ -38,6 +38,17 @@ namespace MyGame.WebApi.Controllers
             return Created("", postPlayer);
         }
         
+        [HttpDelete("{gameId}/players/{playerId}")]
+        public async Task<IActionResult> RemovePlayer(string gameId, string playerId)
+        {
+            var game = await gameRepository.GetById(gameId);
+            game.RemovePlayer(playerId);
+            await gameRepository.Update(game);
+            var gameModel = GameModel.From(game);
+            return Ok(gameModel);
+        }
+        
+        
         [HttpPost("moves")]
         public async Task<IActionResult> PostMove([FromBody] GameMove gameMove)
         {
